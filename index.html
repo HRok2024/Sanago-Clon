@@ -15,12 +15,59 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <style>
+      a.tlist {
+        color: #8f8d8d;
+        text-decoration-line: none;
+      }
+      .pricename {
+        padding-top: 10px;
+        font-size: 0.8rem;
+      }
+      .scl {
+        display: flex;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .youi::before {
+        content: "";
+        background-color: #e8e6e6;
+        position: absolute;
+        top: 0;
+        left: 20%;
+        width: 60vw;
+        height: 50%;
+        z-index: -1;
+      }
+      .shad {
+        transition: 1s;
+      }
+      .shad:hover {
+        box-shadow: 20px 20px 40px #ddd;
+      }
+      .sales {
+        transition: 1s;
+      }
+      .sales:hover {
+        transform: scale(1.2);
+      }
+    </style>
   </head>
+
   <body>
-    <header class="bg-light">
-      <!-- 네비게이션바 시작 -->
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
+    <header
+      style="
+        width: 100%;
+        background-color: #e8e6e6;
+        position: fixed;
+        z-index: 3;
+      "
+      id="head"
+    >
+      <div class="inner" style="width: 90%; margin: auto">
+        <!-- headtop 끝 -->
+        <div style="display: flex; justify-content: space-between">
           <!-- 드롭다운버튼 시작 -->
           <div class="dropdown">
             <button
@@ -38,65 +85,767 @@
             </ul>
           </div>
           <!-- 드롭다운버튼 끝 -->
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#"
-                  >회원가입</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">로그인</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">주문조회</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">최근본상품</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">고객센터</a>
-              </li>
-            </ul>
+          <!-- 네비게이션바 시작 -->
+          <nav class="navbar navbar-expand-lg">
+            <div style="display: flex">
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                  <li class="nav-item">
+                    <a
+                      class="nav-link active"
+                      aria-current="page"
+                      href="#"
+                      data-bs-toggle="modal"
+                      data-bs-target="#Modal"
+                      >회원가입</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      href="#"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                      >로그인</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">주문조회</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">최근본상품</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">고객센터</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <!-- 네비게이션바 끝 -->
+        </div>
+
+        <!-- headtop 끝 -->
+
+        <div class="d-flex column flex-wrap" style="position: relative">
+          <h1 class="d-inline" style="width: 400px; height: 60px">
+            <img
+              src="images/sanagologo.jpg"
+              alt="로고"
+              style="position: absolute; left: 50%; transform: translateX(-50%)"
+            />
+          </h1>
+
+          <div class="ms-auto" style="height: 30px">
+            <a href="#"
+              ><img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAURJREFUSEvF1L8rRXEYx/HXTWaEwSiZLIpVRgulKBaLzWLwa7QopURS/gRZ5FcW/wAlGWQiIykMKKX8OKdc3c69557bOW6+2znn+3zen+fp85ycKp9clfVVCujFIjp+DF1gDsdJBisBjGKTIjOfGMRBOUgSoB43aIgRuUMb3uIgSYDQ4U7CGPpwlBYwjeUEwBRW0wIGsJ8A6MdhWkAdrtEUI3CPdrykBYR1I9gqIRCmaAi7WVKUr+3B0s8efOASszj5iz1I0ij7PSmmmcTD4nKAZswEm9oVzLkTjRHaI85xihU8lHITBxgLBNeDfIcpquQ8YRx70culAJPBr2GtEtUSd4axXfg+CmjFFWpSAl4RavyOKwrYwERK8XzZfGBwIf8QBdyiJSPgDN1xgHfUZgQ8F4Yj2sFXRvEi4/+6aH/STNU7+AYkwS0ZwQsJ3gAAAABJRU5ErkJggg=="
+            /></a>
+            <a href="#"
+              ><img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAPdJREFUSEvt1T9KA0EUgPFfLDyBFraSJtraCnqA2MRbJJWtQgIKlhaCp5CAYO+fC1gZSJXORs+g7sKuCRvGWSZEmyxs9eZ933szj5mGJX+NJfPVFbRxhhbW8YRr3McKrCPoZ5BBANTFzW+SmGAfzwXgfAbWwyk+sy728BKSxAR3OMIJriqQXHCBITqpgndsYBMfFcgW3jDBdqrgq0gMdZrH83+truABB7HJiMQfsyk7LNdUKysrXtAxHf+YoIyHxKH4D/ffBalbVbuDlWDuNv3zMV2dwdwZvGIndV+KvBF2Q3fRMS7RTJSMi6f1NiRI5IbTYi/awsJv+WErGShtNxwAAAAASUVORK5CYII="
+            /></a>
+            <a href="#"
+              ><img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAUpJREFUSEvF1b8uREEUx/HPRk1BeAIhoVKjktCSKDReACWJjohEQ6HgBVQiEiWJSPx5AI1Gg0KpQY09yUjW5t697tqNqebOnPl9zz3nzJmKNo9Km/VlAWaxicEC+Bo2ihzMAtxhqOhg2l/BdiPbLMDnL8W/zRpCWgEIUC6kVYBcSCsBmZBWAwLyQ/O3gGPs4yJldgJLmM4oiNKAZezkVFbchfW6vVKAQ8wlgT3Mp/kBFtP8FFM1kFKAkWoYbhHiC3WeRsgCMomzZgEd+MBrNUyddYA3dKEbL80CQvS9nYBx3BSEKCrqvNk/OMFMQZKPEB34e5RKcsM+kxSHcYme9F0aEOfiou3iOon0YTXdj+fU3q8SpClAXgd/wigCEg9U5Ku31vivD05oPSCKISADuC8CRMK20J/ndsb6Y7WSxhLkx/a/PPolHC82/QLdZkYZQcjMUgAAAABJRU5ErkJggg=="
+            /></a>
           </div>
         </div>
-      </nav>
-      <!-- 네비게이션바 끝 -->
-      <div class="d-flex column justify-content-center align-items-center">
-        <h1 class="d-inline" style="width: 400px; height: 60px">
-          <img src="images/sanagologo.jpg" alt="로고" />
-        </h1>
-
-        <div class="d-inline ms-auto" style="height: 30px">
-          <a href="#"
-            ><img
-              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAURJREFUSEvF1L8rRXEYx/HXTWaEwSiZLIpVRgulKBaLzWLwa7QopURS/gRZ5FcW/wAlGWQiIykMKKX8OKdc3c69557bOW6+2znn+3zen+fp85ycKp9clfVVCujFIjp+DF1gDsdJBisBjGKTIjOfGMRBOUgSoB43aIgRuUMb3uIgSYDQ4U7CGPpwlBYwjeUEwBRW0wIGsJ8A6MdhWkAdrtEUI3CPdrykBYR1I9gqIRCmaAi7WVKUr+3B0s8efOASszj5iz1I0ij7PSmmmcTD4nKAZswEm9oVzLkTjRHaI85xihU8lHITBxgLBNeDfIcpquQ8YRx70culAJPBr2GtEtUSd4axXfg+CmjFFWpSAl4RavyOKwrYwERK8XzZfGBwIf8QBdyiJSPgDN1xgHfUZgQ8F4Yj2sFXRvEi4/+6aH/STNU7+AYkwS0ZwQsJ3gAAAABJRU5ErkJggg=="
-          /></a>
-          <a href="#"
-            ><img
-              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAPdJREFUSEvt1T9KA0EUgPFfLDyBFraSJtraCnqA2MRbJJWtQgIKlhaCp5CAYO+fC1gZSJXORs+g7sKuCRvGWSZEmyxs9eZ933szj5mGJX+NJfPVFbRxhhbW8YRr3McKrCPoZ5BBANTFzW+SmGAfzwXgfAbWwyk+sy728BKSxAR3OMIJriqQXHCBITqpgndsYBMfFcgW3jDBdqrgq0gMdZrH83+truABB7HJiMQfsyk7LNdUKysrXtAxHf+YoIyHxKH4D/ffBalbVbuDlWDuNv3zMV2dwdwZvGIndV+KvBF2Q3fRMS7RTJSMi6f1NiRI5IbTYi/awsJv+WErGShtNxwAAAAASUVORK5CYII="
-          /></a>
-          <a href="#"
-            ><img
-              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAUpJREFUSEvF1b8uREEUx/HPRk1BeAIhoVKjktCSKDReACWJjohEQ6HgBVQiEiWJSPx5AI1Gg0KpQY09yUjW5t697tqNqebOnPl9zz3nzJmKNo9Km/VlAWaxicEC+Bo2ihzMAtxhqOhg2l/BdiPbLMDnL8W/zRpCWgEIUC6kVYBcSCsBmZBWAwLyQ/O3gGPs4yJldgJLmM4oiNKAZezkVFbchfW6vVKAQ8wlgT3Mp/kBFtP8FFM1kFKAkWoYbhHiC3WeRsgCMomzZgEd+MBrNUyddYA3dKEbL80CQvS9nYBx3BSEKCrqvNk/OMFMQZKPEB34e5RKcsM+kxSHcYme9F0aEOfiou3iOon0YTXdj+fU3q8SpClAXgd/wigCEg9U5Ku31vivD05oPSCKISADuC8CRMK20J/ndsb6Y7WSxhLkx/a/PPolHC82/QLdZkYZQcjMUgAAAABJRU5ErkJggg=="
-          /></a>
+        <div style="padding: 2% auto; margin: 0 auto; padding: 1% 0">
+          <ul
+            class="column d-flex justify-content-center"
+            style="list-style-type: none; transform: translateX(-1%)"
+          >
+            <li class="btn btn-outline-secondary" style="margin-left: 1%">
+              전체상품
+            </li>
+            <li class="btn btn-outline-secondary" style="margin-left: 1%">
+              3D펜
+            </li>
+            <li class="btn btn-outline-secondary" style="margin-left: 1%">
+              기타악세사리
+            </li>
+            <li class="btn btn-outline-secondary" style="margin-left: 1%">
+              필라멘트재료
+            </li>
+          </ul>
         </div>
       </div>
     </header>
 
-    <!-- 프리뷰섹션 시작 -->
-    <section></section>
-    <!-- 프리뷰섹션 끝 -->
+    <!-- 메인 -->
+    <main>
+      <!-- 프리뷰섹션 시작 -->
+      <section
+        style="
+          width: 90%;
+          margin: auto;
+          padding-top: 250px;
+          padding-bottom: 50px;
+        "
+      >
+        <!-- 캐러셀 -->
+        <div id="caro" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button
+              type="button"
+              data-bs-target="#caro"
+              data-bs-slide-to="0"
+              class="active"
+              aria-current="true"
+              aria-label="Slide 1"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#caro"
+              data-bs-slide-to="1"
+              aria-label="Slide 2"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#caro"
+              data-bs-slide-to="2"
+              aria-label="Slide 3"
+            ></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="2000">
+              <img
+                src="images/caro1.jpeg"
+                class="d-block w-100"
+                alt="프리뷰1"
+              />
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+              <img
+                src="images/caro2.jpeg"
+                class="d-block w-100"
+                alt="프리뷰2"
+              />
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+              <img
+                src="images/caro3.jpeg"
+                class="d-block w-100"
+                alt="프리뷰3"
+              />
+            </div>
+          </div>
+        </div>
+        <!-- 캐러셀 -->
+      </section>
+      <!-- 프리뷰섹션 끝 -->
+    </main>
+
+    <!-- 상품섹션 시작-->
+    <section class="scl">
+      <!-- 상품탭 -->
+      <div style="display: flex; flex-direction: column; margin-right: 20px">
+        <!-- 상품탭 제목, 소제목 -->
+        <div style="margin: 0 auto 60px auto">
+          <div style="font-size: 2rem">SANAGO</div>
+          <div class="text-secondary" style="font-size: 0.8rem">
+            사나고와 함께 만드는
+          </div>
+        </div>
+        <!-- 상품탭 제목, 소제목 -->
+
+        <!-- 상품탭 리스트 -->
+        <div>
+          <ul class="list-group" style="padding: 0">
+            <li class="list-group-item">
+              <a href="#" class="tlist">#3D펜</a>
+            </li>
+            <li class="list-group-item">
+              <a href="#" class="tlist">#소모품, 도구 등</a>
+            </li>
+            <li class="list-group-item">
+              <a href="#" class="tlist">#기타 굿즈</a>
+            </li>
+            <li class="list-group-item">
+              <a href="#" class="tlist">#전체상품</a>
+            </li>
+          </ul>
+        </div>
+        <!-- 상품탭 리스트 -->
+      </div>
+      <!-- 상품탭 -->
+      <div style="width: 100%; margin: auto">
+        <ul class="row">
+          <li
+            class="col-lg-3 col-md-4 col-sm-6 col-12"
+            style="list-style-type: none; margin-bottom: 70px"
+          >
+            <div>
+              <a href="#"
+                ><img
+                  src="images/sales10.jpg"
+                  alt="상품1"
+                  style="width: 100%"
+                  class="shad"
+              /></a>
+              <div class="pricename">
+                뉴 사나고 3D펜 우드버닝툴 인두기 모듈교체
+              </div>
+              <div class="pricename">79,500원</div>
+            </div>
+          </li>
+          <li
+            class="col-lg-3 col-md-4 col-sm-6 col-12"
+            style="list-style-type: none; margin-bottom: 70px"
+          >
+            <div>
+              <a href="#"
+                ><img
+                  src="images/sales01.jpg"
+                  alt="상품2"
+                  style="width: 100%"
+                  class="shad"
+              /></a>
+              <div class="pricename">사나고 고급형 3D펜 네이비</div>
+              <div class="pricename">59,000원</div>
+            </div>
+          </li>
+          <li
+            class="col-lg-3 col-md-4 col-sm-6 col-12"
+            style="list-style-type: none; margin-bottom: 70px"
+          >
+            <div>
+              <a href="#"
+                ><img
+                  src="images/sales03.jpg"
+                  alt="상품3"
+                  style="width: 100%"
+                  class="shad"
+              /></a>
+              <div class="pricename">사나고 고급형 3D펜 화이트</div>
+              <div class="pricename">59,000원</div>
+            </div>
+          </li>
+          <li
+            class="col-lg-3 col-md-4 col-sm-6 col-12"
+            style="list-style-type: none; margin-bottom: 70px"
+          >
+            <div>
+              <a href="#"
+                ><img
+                  src="images/sales05.jpg"
+                  alt="상품4"
+                  style="width: 100%"
+                  class="shad"
+              /></a>
+              <div class="pricename">사나고 저온3D펜 내가그린기린펜</div>
+              <div class="pricename">69,900원</div>
+            </div>
+          </li>
+          <li
+            class="col-lg-3 col-md-4 col-sm-6 col-12"
+            style="list-style-type: none; margin-bottom: 70px"
+          >
+            <div>
+              <a href="#"
+                ><img
+                  src="images/sales11.png"
+                  alt="상품5"
+                  style="width: 100%"
+                  class="shad"
+              /></a>
+              <div class="pricename">
+                사나고 고급형 3D펜 네이비, 우두버닝툴 (이벤트 상품)
+              </div>
+              <div class="pricename">71,900원</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <!-- 상품섹션 끝-->
+
+    <!-- 뉴얼라이버섹션 시작 -->
+    <section style="width: 90%; margin-left: auto; margin-right: auto">
+      <!-- 뉴얼라이버 제목 -->
+      <div style="margin-right: auto">
+        <div style="font-size: 2rem">New Arrivals</div>
+        <div class="text-secondary" style="font-size: 0.8rem; padding: 10px">
+          놓치기에 아쉬운
+        </div>
+      </div>
+      <!-- 뉴얼라이버 제목 -->
+
+      <!-- 뉴얼라이버 품목 -->
+      <div style="width: 100%; margin: auto">
+        <ul class="row" style="padding: 0">
+          <li
+            class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12"
+            style="list-style-type: none; margin-bottom: 70px"
+          >
+            <div>
+              <a href="#"
+                ><img
+                  src="images/sales19.jpg"
+                  alt="상품1"
+                  style="width: 100%"
+                  class="sales"
+              /></a>
+              <div class="pricename">사나고3D펜 드로잉 패드</div>
+              <div class="pricename">5,000원</div>
+            </div>
+          </li>
+          <li
+            class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12"
+            style="list-style-type: none; margin-bottom: 70px"
+          >
+            <div>
+              <a href="#"
+                ><img
+                  src="images/sales17.jpg"
+                  alt="상품2"
+                  style="width: 100%"
+                  class="sales"
+              /></a>
+              <div class="pricename">앙뚜 나고 뱃지</div>
+              <div class="pricename">3,900원</div>
+            </div>
+          </li>
+          <li
+            class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12"
+            style="list-style-type: none; margin-bottom: 70px"
+          >
+            <div>
+              <a href="#"
+                ><img
+                  src="images/sales15.jpg"
+                  alt="상품3"
+                  style="width: 100%"
+                  class="sales"
+              /></a>
+              <div class="pricename">뉴 사나고3D펜 펜촉, 인두기 모듈</div>
+              <div class="pricename">8,800원</div>
+            </div>
+          </li>
+          <li
+            class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12"
+            style="list-style-type: none; margin-bottom: 70px"
+          >
+            <div>
+              <a href="#"
+                ><img
+                  src="images/sales07.jpg"
+                  alt="상품4"
+                  style="width: 100%"
+                  class="sales"
+              /></a>
+              <div class="pricename">사나고 PLA 필라멘트 10색 250g 1.75mm</div>
+              <div class="pricename">9,400원</div>
+            </div>
+          </li>
+          <li
+            class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12"
+            style="list-style-type: none; margin-bottom: 70px"
+          >
+            <div>
+              <a href="#"
+                ><img
+                  src="images/sales12.jpg"
+                  alt="상품5"
+                  style="width: 100%"
+                  class="sales"
+              /></a>
+              <div class="pricename">사나고 인두기 팁 교체형</div>
+              <div class="pricename">17,000원</div>
+            </div>
+          </li>
+          <li
+            class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12"
+            style="list-style-type: none; margin-bottom: 70px"
+          >
+            <div>
+              <a href="#"
+                ><img
+                  src="images/sales05.jpg"
+                  alt="상품6"
+                  style="width: 100%"
+                  class="sales"
+              /></a>
+              <div class="pricename">사나고 저온3D펜 내가그린기린펜</div>
+              <div class="pricename">69,900원</div>
+            </div>
+          </li>
+          <li
+            class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12"
+            style="list-style-type: none; margin-bottom: 70px"
+          >
+            <div>
+              <a href="#"
+                ><img
+                  src="images/sales09.jpg"
+                  alt="상품7"
+                  style="width: 100%"
+                  class="sales"
+              /></a>
+              <div class="pricename">사나고 제연기 실내 흡연기</div>
+              <div class="pricename">45,000원</div>
+            </div>
+          </li>
+          <li
+            class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12"
+            style="list-style-type: none; margin-bottom: 70px"
+          >
+            <div>
+              <a href="#"
+                ><img
+                  src="images/sales06.jpg"
+                  alt="상품8"
+                  style="width: 100%"
+                  class="sales"
+              /></a>
+              <div class="pricename">사나고 PLA 필라멘트 거치대</div>
+              <div class="pricename">39,900원</div>
+            </div>
+          </li>
+          <li
+            class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12"
+            style="list-style-type: none; margin-bottom: 70px"
+          >
+            <div>
+              <a href="#"
+                ><img
+                  src="images/sales10.jpg"
+                  alt="상품9"
+                  style="width: 100%"
+                  class="sales"
+              /></a>
+              <div class="pricename">
+                뉴 사나고 3D펜 우드버닝툴 인두기 모듈교체
+              </div>
+              <div class="pricename">79,500원</div>
+            </div>
+          </li>
+          <li
+            class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12"
+            style="list-style-type: none; margin-bottom: 70px"
+          >
+            <div>
+              <a href="#"
+                ><img
+                  src="images/sales04.jpg"
+                  alt="상품10"
+                  style="width: 100%"
+                  class="sales"
+              /></a>
+              <div class="pricename">사나고 PLA필라멘트</div>
+              <div class="pricename">990원</div>
+            </div>
+          </li>
+          <li
+            class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12"
+            style="list-style-type: none; margin-bottom: 70px"
+          >
+            <div>
+              <a href="#"
+                ><img
+                  src="images/sales03.jpg"
+                  alt="상품11"
+                  style="width: 100%"
+                  class="sales"
+              /></a>
+              <div class="pricename">사나고 고급형 3D펜 화이트</div>
+              <div class="pricename">59,000원</div>
+            </div>
+          </li>
+          <li
+            class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12"
+            style="list-style-type: none; margin-bottom: 70px"
+          >
+            <div>
+              <a href="#"
+                ><img
+                  src="images/sales07.jpg"
+                  alt="상품12"
+                  style="width: 100%"
+                  class="sales"
+              /></a>
+              <div class="pricename">사나고 PLA 필라멘트 10색 200g 1.75mm</div>
+              <div class="pricename">8,900원</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- 뉴얼라이버 품목 -->
+    </section>
+    <!-- 뉴얼라이버섹션 끝 -->
+
+    <!-- 비디오섹션 시작 -->
+    <section class="scl" style="flex-direction: column; position: relative">
+      <div>
+        <div style="margin-right: auto; margin-top: 10px; margin-bottom: 30px">
+          <div style="font-size: 2rem">SANAGO YOUTUBE</div>
+          <div
+            class="text-secondary"
+            style="font-size: 0.8rem; padding-top: 10px; padding-bottom: 10px"
+          >
+            사나고 유튜브 채널
+          </div>
+        </div>
+      </div>
+      <div class="youi">
+        <iframe
+          width="100%"
+          height="487px"
+          src="https://www.youtube.com/embed/vFdEEF0Mm44?si=l3r0KhWggzIGB0US"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </section>
+    <!-- 비디오섹션 끝 -->
+
+    <!-- 헬로섹션 시작 -->
+    <section class="scl">
+      <div
+        style="
+          background-color: #e8e6e6;
+          width: 100%;
+          text-align: center;
+          padding-top: 80px;
+          padding-bottom: 80px;
+          margin-top: 150px;
+          margin-bottom: 100px;
+        "
+      >
+        <div style="font-size: 2rem">3D Pen Creator SANAGO</div>
+        <div class="text-secondary" style="font-size: 0.8rem">
+          사나고샵에 오신걸 환영합니다.
+        </div>
+      </div>
+    </section>
+    <!-- 헬로섹션 끝 -->
+    <!-- 메인 -->
+
+    <!-- 푸터 -->
+    <section style="color: #8f8d8d">
+      <div style="border-top: 1px solid #e8e6e6">
+        <div class="footerinner" style="width: 90%; margin: auto">
+          <!-- 쇼핑몰 정보 -->
+          <div
+            style="
+              padding: 0;
+              margin-top: 30px;
+              display: flex;
+              flex-direction: row;
+              flex-wrap: wrap;
+              justify-content: space-between;
+            "
+          >
+            <ul style="justify-content: center">
+              <li
+                style="
+                  list-style-type: none;
+                  color: black;
+                  margin-top: 20px;
+                  margin-bottom: 10px;
+                "
+              >
+                <img src="images/footerlogo.gif" alt="쇼핑몰 기본정보" />
+                <div style="font-size: 1rem"><br /><b>쇼핑몰 기본정보</b></div>
+              </li>
+              <ul
+                style="
+                  padding: 0;
+                  font-size: 0.8rem;
+                  display: flex;
+                  flex-wrap: wrap;
+                  width: 300px;
+                "
+              >
+                <li style="list-style-type: none; margin-right: 10px">
+                  <span><b> 상호명 </b></span><span>주식회사나고 </span>
+                </li>
+                <li style="list-style-type: none; margin-right: 10px">
+                  <span><b> 대표명 </b></span><span>나고 </span>
+                </li>
+                <li style="list-style-type: none; margin-right: 10px">
+                  <span><b> 사업장주소 </b></span><span>부산 </span>
+                </li>
+                <li style="list-style-type: none; margin-right: 10px">
+                  <span><b> 대표전화 </b></span><span>1234-5678 </span>
+                </li>
+                <li style="list-style-type: none; margin-right: 10px">
+                  <span><b> 사업자등록번호 </b></span><span>123-45-67891 </span>
+                </li>
+                <li style="list-style-type: none; margin-right: 10px">
+                  <span><b> 개인정보보호책임자 </b></span
+                  ><span>주식회사나고 </span>
+                </li>
+              </ul>
+            </ul>
+            <ul
+              style="
+                display: flex;
+                font-size: 0.8rem;
+                margin-top: 50px;
+                flex-wrap: wrap;
+              "
+            >
+              <li style="list-style-type: none">
+                <span style="color: black; font-size: 1rem"
+                  ><strong>고객센터정보</strong></span
+                >
+                <ul style="padding: 0; margin-top: 10px">
+                  <li style="list-style-type: none; margin-top: 5px">
+                    <strong>상담주문전화</strong><br /><span
+                      >010-1234-5678</span
+                    >
+                  </li>
+                  <li style="list-style-type: none; margin-top: 5px">
+                    <strong>상담/주문 이메일</strong><br /><span
+                      >abc3@abcd.com</span
+                    >
+                  </li>
+                  <li style="list-style-type: none; margin-top: 5px">
+                    <strong>CS운영시간</strong><br /><span
+                      >오전 10:00 ~ 오후 5:00</span
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li style="list-style-type: none">
+                <span style="color: black; font-size: 1rem"
+                  ><b>결제정보</b></span
+                >
+                <ul style="padding: 0; margin-top: 10px">
+                  <li style="list-style-type: none">
+                    <strong>무통장 계좌정보</strong><br /><span
+                      >국민은행 123123123 나고<br />(사나고스튜디오)</span
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li style="list-style-type: none">
+                <span style="color: black; font-size: 1rem"><b>SNS</b></span>
+                <ul style="padding: 0; margin-top: 10px">
+                  <li style="list-style-type: none">
+                    <span>YouTube</span>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <ul
+              style="
+                display: flex;
+                flex-direction: row;
+                justify-content: start;
+                font-size: 0.8rem;
+                flex-wrap: wrap;
+              "
+            >
+              <li style="list-style-type: none; padding-right: 15px">
+                회사소개
+              </li>
+              <li style="list-style-type: none; padding-right: 15px">
+                이용약관
+              </li>
+              <li style="list-style-type: none; padding-right: 15px">
+                개인정보처리방침
+              </li>
+              <li style="list-style-type: none; padding-right: 15px">
+                이용안내
+              </li>
+            </ul>
+          </div>
+          <div
+            style="
+              justify-content: start;
+              padding-left: 32px;
+              margin-top: 60px;
+              margin-bottom: 30px;
+              font-size: 0.7rem;
+            "
+          >
+            Copyright © 사나고샵. All Rights Reserved. Hosting by Cafe24 Corp.
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- 푸터 -->
+
+    <!-- 회원가입모달창 시작 -->
+    <div
+      class="modal fade"
+      id="Modal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">회원가입</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">미구현입니다</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              닫기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 회원가입모달창 끝 -->
+
+    <!-- 로그인모달창 시작 -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">로그인</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">...</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success">회원가입</button>
+            <button type="button" class="btn btn-primary">로그인</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 로그인모달창 끝 -->
   </body>
 </html>
