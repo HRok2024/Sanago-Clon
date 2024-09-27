@@ -37,7 +37,9 @@
     - hover 속성을 하여 마우스를 올리면 이미지가 스케일업 되도록 제작
   - 유튜브 영상 소개
     - iframe으로 사나고 유튜브 채널의 영상을 볼수있게 제작
-    - css의 ::before 속성으로 가상의 요소를 만들어 영상 뒤쪽에 배치
+      - iframe을 div요소로 감싸고 position : relative;와 아래쪽에 56.25%의 패딩값(영상의 16:9비율을 위한 수치)을 추가
+      - iframe에 position : absolute;속성을 추가하여 top과 left에 0의 위치에 위치시키고 width와 height를 100%로 입력하여 화면의 크기가 달라져도 16:9비율을 유지하도록 설정
+    - iframe을 감싸고 있는 div요소에 css속성인 ::before 속성을 추가하여 가상의 요소를 만들어 영상 뒤쪽에 배치
       - position : absolute; 속성을 사용
       - css속성에서 content="";를 입력해야지만 요소에 크기가 생겼음
   - 인사말 -푸터
